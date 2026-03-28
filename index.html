@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoogleFix.id – Solusi Akun Google Anda</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --card: #151d2e;
+    --border: rgba(255,255,255,0.07);
+    --accent: #4285f4;
+    --accent2: #34a853;
+    --accent3: #fbbc05;
+    --accent4: #ea4335;
+    --glow: rgba(66,133,244,0.35);
+    --text: #f0f4ff;
+    --muted: #8a9bb5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BG MESH ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 10%, rgba(66,133,244,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(52,168,83,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 60% 30%, rgba(251,188,5,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── GRID DOTS ── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,15,30,0.75);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; padding-bottom: 14px;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem; font-weight: 800;
+    letter-spacing: -0.5px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-g {
+    width: 34px; height: 34px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent3) 100%);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 900; color: #fff;
+    box-shadow: 0 0 18px var(--glow);
+  }
+  .badge-nav {
+    font-size: 0.65rem; font-weight: 600;
+    background: rgba(66,133,244,0.18);
+    color: #7ab3ff;
+    border: 1px solid rgba(66,133,244,0.3);
+    border-radius: 20px; padding: 2px 10px;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero { padding: 90px 0 60px; text-align: center; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(66,133,244,0.12);
+    border: 1px solid rgba(66,133,244,0.3);
+    border-radius: 30px; padding: 6px 18px;
+    font-size: 0.78rem; font-weight: 600;
+    color: #7ab3ff; letter-spacing: 0.4px;
+    text-transform: uppercase; margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 8px var(--accent2);
+    animation: pulse 1.6s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    font-weight: 800; line-height: 1.12;
+    letter-spacing: -1.5px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    margin: 20px auto 0; max-width: 520px;
+    font-size: 1.05rem; line-height: 1.75;
+    color: var(--muted); font-weight: 400;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── GOOGLE COLORS BAR ── */
+  .gbar {
+    display: flex; justify-content: center; gap: 6px;
+    margin-top: 36px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .gbar span {
+    display: block; width: 40px; height: 5px; border-radius: 3px;
+  }
+
+  /* ── PRODUCTS ── */
+  .products { padding: 20px 0 80px; }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 26px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(66,133,244,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(66,133,244,0.12);
+  }
+
+  .popular-tag {
+    position: absolute; top: 16px; right: 16px;
+    background: linear-gradient(135deg, #fbbc05, #f59e0b);
+    color: #1a0f00; font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  .card-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 20px;
+  }
+  .card:nth-child(1) .card-icon { background: rgba(66,133,244,0.15); }
+  .card:nth-child(2) .card-icon { background: rgba(251,188,5,0.15); }
+  .card:nth-child(3) .card-icon { background: rgba(52,168,83,0.15); }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    letter-spacing: -0.3px; margin-bottom: 10px;
+  }
+  .card p.desc {
+    font-size: 0.88rem; color: var(--muted);
+    line-height: 1.65; margin-bottom: 22px;
+  }
+  .card .price {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.65rem; font-weight: 800;
+    letter-spacing: -0.5px; margin-bottom: 20px;
+  }
+  .card:nth-child(1) .price { color: var(--accent); }
+  .card:nth-child(2) .price { color: var(--accent3); }
+  .card:nth-child(3) .price { color: var(--accent2); }
+
+  .features {
+    list-style: none; margin-bottom: 26px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .features li {
+    font-size: 0.85rem; color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .features li::before {
+    content: '✓';
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(52,168,83,0.15);
+    color: var(--accent2);
+    font-size: 0.7rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .btn-order {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 13px 0;
+    border-radius: 12px; border: none; cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.92rem; font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    letter-spacing: 0.2px;
+  }
+  .btn-blue { background: var(--accent); color: #fff; }
+  .btn-gold { background: var(--accent3); color: #1a0f00; }
+  .btn-green { background: var(--accent2); color: #fff; }
+
+  /* ── NEW PAYMENT STYLE ── */
+  .payment-section { padding-bottom: 80px; }
+  .payment-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  .payment-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem; font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(to right, #fff, var(--muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .pay-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  .pay-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    padding: 20px 10px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+  .pay-item:hover {
+    background: rgba(66,133,244,0.08);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .pay-item img {
+    height: 30px; object-fit: contain; filter: brightness(1.2);
+    margin-bottom: 10px;
+  }
+  .pay-item span {
+    display: block; font-size: 0.8rem; font-weight: 700; 
+    text-transform: uppercase; letter-spacing: 1px; color: var(--text);
+  }
+
+  /* ── CTA ── */
+  .cta-section { padding-bottom: 80px; }
+  .cta-box {
+    background: linear-gradient(135deg, rgba(66,133,244,0.15) 0%, rgba(52,168,83,0.10) 100%);
+    border: 1px solid rgba(66,133,244,0.25);
+    border-radius: 24px; padding: 50px 36px; text-align: center;
+  }
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25d366; color: #fff;
+    padding: 15px 36px; border-radius: 14px;
+    font-weight: 700; text-decoration: none;
+    box-shadow: 0 6px 30px rgba(37,211,102,0.4);
+    transition: 0.25s;
+  }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(37,211,102,0.6); }
+
+  footer { border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--muted); font-size: 0.82rem; }
+  
+  /* Mobile Adjustment */
+  @media (max-width: 600px) {
+    .pay-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">
+      <div class="logo-g">G</div>
+      GoogleFix<span style="color:var(--accent)">.id</span>
+    </div>
+    <span class="badge-nav">🟢 Online</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge"><span class="dot"></span> Terpercaya & Profesional</div>
+    <h1>Solusi Cepat<br>untuk <span>Akun Google</span> Anda</h1>
+    <p>Layanan pemulihan akun, tool eksklusif, dan program kemitraan — cepat, aman, dan terjangkau.</p>
+    <div class="gbar">
+      <span style="background:var(--accent)"></span>
+      <span style="background:var(--accent4)"></span>
+      <span style="background:var(--accent3)"></span>
+      <span style="background:var(--accent2)"></span>
+    </div>
+  </div>
+</section>
+
+<section class="products">
+  <div class="wrap">
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🔑</div>
+        <h3>Pemulihan Akun Google</h3>
+        <p class="desc">Akun terkunci atau lupa password? Kami bantu pulihkan dengan aman.</p>
+        <div class="price">Rp 50.000</div>
+        <ul class="features">
+          <li>Proses cepat</li>
+          <li>Garansi berhasil</li>
+        </ul>
+        <a href="https://wa.me/6285124505028?text=Halo%20GoogleFix.id,%20saya%20ingin%20order%20Pemulihan%20Akun%20Google" class="btn-order btn-blue">💬 Order Sekarang</a>
+      </div>
+
+      <div class="card">
+        <span class="popular-tag">⭐ Terlaris</span>
+        <div class="card-icon">🔗</div>
+        <h3>Link Sakti + Tutorial</h3>
+        <p class="desc">Link eksklusif plus panduan lengkap memaksimalkan akun Google Anda.</p>
+        <div class="price">Rp 80.000</div>
+        <ul class="features">
+          <li>Link Powerful</li>
+          <li>Tutorial Step-by-step</li>
+        </ul>
+        <a href="https://wa.me/6285124505028?text=Halo%20GoogleFix.id,%20saya%20ingin%20order%20Link%20Sakti%20%2B%20Tutorial" class="btn-order btn-gold">💬 Order Sekarang</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <h3>Join Partner</h3>
+        <p class="desc">Bergabung sebagai mitra resmi dan nikmati komisi serta akses khusus.</p>
+        <div class="price">Rp 120.000</div>
+        <ul class="features">
+          <li>Komisi Menarik</li>
+          <li>Grup VIP Partner</li>
+        </ul>
+        <a href="https://wa.me/6285124505028?text=Halo%20GoogleFix.id,%20saya%20ingin%20Join%20Partner" class="btn-order btn-green">💬 Daftar Sekarang</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="payment-section">
+  <div class="wrap">
+    <div class="payment-card">
+      <h3>💳 Metode Pembayaran Aman</h3>
+      <div class="pay-grid">
+        <div class="pay-item">
+          <span>📱 QRIS</span>
+        </div>
+        <div class="pay-item">
+          <span>💎 DANA</span>
+        </div>
+        <div class="pay-item">
+          <span>⚡ GOPAY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Ada Pertanyaan Lain?</h2>
+      <p>Hubungi admin kami untuk konsultasi gratis mengenai akun Anda.</p>
+      <a href="https://wa.me/6285124505028" class="btn-wa">
+        Hubungi Kami via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 <strong>GoogleFix.id</strong> — Layanan Profesional Bergaransi</p>
+  </div>
+</footer>
+
+</body>
+</html>
